@@ -3,10 +3,8 @@ import { ProductController } from "./product.controller";
 
 const router = express.Router();
 
-// Create a New Product
-router.post("/", ProductController.createProduct);
 
-// Retrieve a List of All Products
+router.post("/", ProductController.createProduct);
 router.get("/", ProductController.getAllProducts);
 
 
