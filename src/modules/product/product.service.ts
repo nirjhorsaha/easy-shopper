@@ -19,6 +19,22 @@ const retriveProductByID = async (productId: string) => {
   return result;
 };
 
+
+// Retrieve a List of All Products
+const retrieveAllProducts = async (searchTerm?: string) => {
+  try {
+    const query = searchTerm
+      ? { name: new RegExp(searchTerm, 'i') } // Using a case-insensitive regular expression to match the search term
+      : {};
+    const result = await Product.find(query);
+    return result;
+  } catch (error) {
+    console.error('Error retrieving products:', error);
+    throw new Error('Failed to retrieve products');
+  }
+};
+
+
 // Update Product Information
 const updateProductInfo = async (
     productId: string,
@@ -42,4 +58,5 @@ export const productService = {
   retriveProductByID,
   updateProductInfo,
   deleteProduct,
+  retrieveAllProducts,
 };
