@@ -1,19 +1,13 @@
-export type TVariant = {
-  type: string;
-  value: string;
-};
+import express from "express";
+import { ProductController } from "./product.controller";
 
-export type TInventory = {
-  quantity: number;
-  inStock: boolean;
-};
+const router = express.Router();
 
-export type TProduct = {
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  tags: string[];
-  variants: TVariant[];
-  inventory: TInventory;
-};
+// Create a New Product
+router.post("/", ProductController.createProduct);
+
+// Retrieve a List of All Products
+router.get("/", ProductController.getAllProducts);
+
+
+export const ProductRoutes = router;
