@@ -28,6 +28,7 @@ const productSchema = new Schema({
   name: {
     type: String,
     required: [true, 'Product name is required'], 
+    unique: true
   },
   description: {
     type: String,
