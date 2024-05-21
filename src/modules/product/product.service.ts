@@ -30,7 +30,12 @@ const updateProductInfo = async (
     return result;
   };
   
-
+  // Delete a Product
+  const deleteProduct = async (productId: string) => {
+    const result = await Product.deleteOne({ _id: productId });
+    return result.deletedCount > 0;
+  };
+  
 export const productService = {
   createNewProduct,
   retriveALLProduct,
