@@ -8,7 +8,7 @@ const createProduct = async (req: Request, res: Response) => {
     const parsedData = productSchema.parse(productData);
 
     const result = await productService.createNewProduct(parsedData);
-    res.json({
+    res.status(201).json({
       success: true,
       message: 'Product created successfully!',
       data: result,
@@ -114,7 +114,6 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 const deleteProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
