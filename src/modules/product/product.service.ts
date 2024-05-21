@@ -7,6 +7,7 @@ const createNewProduct = async (product: TProduct) => {
     return result;
 }
 
+// Retrieve a List of All Products
 const retriveALLProduct = async () => { 
     const result = await Product.find();
     return result;
