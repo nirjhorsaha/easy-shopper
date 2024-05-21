@@ -19,8 +19,22 @@ const retriveProductByID = async (productId: string) => {
   return result;
 };
 
+// Update Product Information
+const updateProductInfo = async (
+    productId: string,
+    productData: Partial<TProduct>,
+  ) => {
+    const result = await Product.findByIdAndUpdate(productId, productData, {
+      new: true,
+    });
+    return result;
+  };
+  
+
 export const productService = {
   createNewProduct,
   retriveALLProduct,
   retriveProductByID,
+  updateProductInfo,
+  deleteProduct,
 };
