@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 import { productService } from './product.service';
-import { productSchema } from './product.validation';
-import { Product } from './product.model';
+import { productValidationSchema } from './product.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { products: productData } = req.body;
-    const parsedData = productSchema.parse(productData);
+    const parsedData = productValidationSchema.parse(productData);
 
     const result = await productService.createNewProduct(parsedData);
     res.json({
@@ -42,11 +41,13 @@ const getAllProducts = async (req: Request, res: Response) => {
 
 const getProductById = async (req: Request, res: Response) => {
   const product = await productService.retriveProductByID(req.params.productId);
+
   if (!product) {
     return res
       .status(404)
       .json({ success: false, message: 'Product not found' });
   }
+
   try {
     res.status(200).json({
       success: true,
@@ -108,6 +109,7 @@ const deleteProduct = async (req: Request, res: Response) => {
     message: 'Product deleted successfully!',
   });
 };
+
 
 export const ProductController = {
   createProduct,

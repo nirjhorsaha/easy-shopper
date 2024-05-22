@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const productSchema = z.object({
+export const productValidationSchema = z.object({
   name: z.string(),
   description: z.string(),
   price: z.number().positive({ message: 'Price must be a positive number' }),
