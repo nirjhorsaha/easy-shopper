@@ -5,9 +5,10 @@ import { productValidationSchema } from './product.validation';
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { products: productData } = req.body;
-    const parsedData = productValidationSchema.parse(productData);
+    const zodParsedData = productValidationSchema.parse(productData);
 
-    const result = await productService.createNewProduct(parsedData);
+    const result = await productService.createNewProduct(zodParsedData);
+
     res.status(201).json({
       success: true,
       message: 'Product created successfully!',
@@ -68,9 +69,10 @@ const getProductById = async (req: Request, res: Response) => {
   const product = await productService.retriveProductByID(req.params.productId);
 
   if (!product) {
-    return res
-      .status(404)
-      .json({ success: false, message: 'Product not found' });
+    return res.status(404).json({
+      success: false,
+      message: 'Product not found',
+    });
   }
 
   try {
@@ -133,7 +135,6 @@ const deleteProduct = async (req: Request, res: Response) => {
     message: 'Product deleted successfully!',
   });
 };
-
 
 export const ProductController = {
   createProduct,

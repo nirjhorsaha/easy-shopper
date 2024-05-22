@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { ProductRoutes } from './modules/product/product.routes';
+import { OrderRoutes } from './modules/order/order.routes';
 
 const app = express();
 
@@ -9,7 +10,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/products', ProductRoutes);
-// app.use('/api/orders', orderRoutes);
+app.use('/api/orders', OrderRoutes);
 
 // Not Found Route
 app.use((req, res) => {
