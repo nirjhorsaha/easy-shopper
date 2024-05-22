@@ -11,6 +11,7 @@ This is an E-commerce API built with `TypeScript`, `Express`, `Mongoose`, and `Z
   - [Getting Started](#getting-started)
     - [Clone the repository](#clone-the-repository)
     - [Install dependencies](#install-dependencies)
+    - [Set up environment variables](#set-up-environment-variables)
     - [Start the server](#start-the-server)
   - [Contributing](#contributing)
 
@@ -48,6 +49,17 @@ cd ease-shopper
 ```bash
 npm install
 ```
+
+### Set up environment variables
+
+Create a `.env` file in the root directory and add the following variables:
+
+```bash
+MONGO_URI=mongodb+srv://<admin>:<password>@cluster0.txtczm4.mongodb.net/<project-name>?retryWrites=true&w=majority&appName=Cluster0
+
+PORT=5000
+```
+
 
 ### Start the server
 ```bash
