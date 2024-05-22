@@ -13,12 +13,15 @@ app.use((0, cors_1.default)());
 // Routes
 app.use('/api/products', product_routes_1.ProductRoutes);
 app.use('/api/orders', order_routes_1.OrderRoutes);
-// Not Found Route
-app.use((req, res) => {
-    res.status(404).json({ success: false, message: 'Route not found' });
-});
 // initial response check
 app.get('/', (req, res) => {
     res.send('Hello Backend Developer..!');
+});
+// Not Found Route
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found',
+    });
 });
 exports.default = app;
