@@ -31,7 +31,7 @@ const checkAvailableQuantity = async (productId: string) => {
 const getAllOrders = async (email?: string) => {
   if (email) {
     return await Order.find({
-      email: { $regex: email, $options: 'i' },
+      email: email,
     });
   } else {
     return await Order.find();

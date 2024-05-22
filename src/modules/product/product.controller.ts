@@ -52,7 +52,7 @@ const getAllProducts = async (req: Request, res: Response) => {
     } else {
       res.status(200).json({
         success: true,
-        message: 'Products fetched successfully!',
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
         data: result,
       });
     }
