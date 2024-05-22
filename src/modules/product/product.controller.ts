@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { productService } from './product.service';
-import { productValidationSchema } from './product.validation';
+import productValidationSchema from './product.validation';
 
 const createProduct = async (req: Request, res: Response) => {
   try {
@@ -60,22 +60,23 @@ const getAllProducts = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: 'Failed to fetch products',
-      error: err.message,
+      error: err,
     });
   }
 };
 
 const getProductById = async (req: Request, res: Response) => {
-  const product = await productService.retriveProductByID(req.params.productId);
-
-  if (!product) {
-    return res.status(404).json({
-      success: false,
-      message: 'Product not found',
-    });
-  }
-
   try {
+    const product = await productService.retriveProductByID(
+      req.params.productId,
+    );
+
+    // if (!product) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: 'Product not found',
+    //   });
+    // }
     res.status(200).json({
       success: true,
       message: 'Product fetched successfully!',
@@ -84,7 +85,8 @@ const getProductById = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: 'Product not found',
+      error: error
     });
   }
 };

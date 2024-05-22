@@ -1,11 +1,15 @@
 import { z } from 'zod';
 
-export const productValidationSchema = z.object({
+const productValidationSchema = z.object({
   name: z.string(),
   description: z.string(),
-  price: z.number().positive({ message: 'Price must be a positive number' }),
+  price: z.number().positive({
+    message: 'Price must be a positive number',
+  }),
   category: z.string(),
-  tags: z.array(z.string()).min(1, { message: 'At least one tag is required' }),
+  tags: z.array(z.string()).min(1, {
+    message: 'At least one tag is required',
+  }),
   variants: z
     .array(
       z.object({
@@ -13,12 +17,15 @@ export const productValidationSchema = z.object({
         value: z.string(),
       }),
     )
-    .min(1, { message: 'At least one variant is required' }),
+    .min(1, {
+      message: 'At least one variant is required',
+    }),
   inventory: z.object({
-    quantity: z
-      .number()
-      .int()
-      .nonnegative({ message: 'Quantity must be a non-negative integer' }),
+    quantity: z.number().int().nonnegative({
+      message: 'Quantity must be a non-negative integer',
+    }),
     inStock: z.boolean(),
   }),
 });
+
+export default productValidationSchema;

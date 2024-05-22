@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { orderValidationSchema } from './order.validation';
 import { orderService } from './order.service';
+import orderValidationSchema from './order.validation';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
@@ -34,6 +34,33 @@ const createOrder = async (req: Request, res: Response) => {
     });
   }
 };
+
+const getAllOrders = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+    const orders = await orderService.getAllOrders(email as string);
+
+    if (email && orders.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: `No orders found for email '${email}'`,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: email
+        ? 'Orders fetched successfully for user email!'
+        : 'Orders fetched successfully!',
+      data: orders,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error,
+    });
+  }
+};
 export const OrderController = {
   createOrder,
+  getAllOrders,
 };
