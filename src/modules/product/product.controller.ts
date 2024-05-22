@@ -8,7 +8,7 @@ const createProduct = async (req: Request, res: Response) => {
     const parsedData = productValidationSchema.parse(productData);
 
     const result = await productService.createNewProduct(parsedData);
-    res.json({
+    res.status(201).json({
       success: true,
       message: 'Product created successfully!',
       data: result,
@@ -22,19 +22,44 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+// const getAllProducts = async (req: Request, res: Response) => {
+//   try {
+//     const result = await productService.retriveALLProduct();
+//     res.status(200).json({
+//       success: true,
+//       message: 'Product fetched successfully!',
+//       data: result,
+//     });
+//   } catch (err: any) {
+//     res.status(500).json({
+//       success: false,
+//       message: 'Failed to fetch products',
+//       error: err,
+//     });
+//   }
+// };
+
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await productService.retriveALLProduct();
-    res.status(200).json({
-      success: true,
-      message: 'Product fetched successfully!',
-      data: result,
-    });
+    const searchTerm = req.query.searchTerm as string | undefined;
+    const result = await productService.retrieveAllProducts(searchTerm);
+    if (result.length === 0) {
+      res.status(404).json({
+        success: false,
+        message: 'Searched item not found',
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: 'Products fetched successfully!',
+        data: result,
+      });
+    }
   } catch (err: any) {
     res.status(500).json({
       success: false,
       message: 'Failed to fetch products',
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -91,7 +116,6 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 
 const deleteProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;

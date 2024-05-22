@@ -8,14 +8,22 @@ const createNewProduct = async (product: TProduct) => {
 };
 
 // Retrieve a List of All Products
-const retriveALLProduct = async () => {
-  const result = await Product.find();
-  return result;
-};
+// const retriveALLProduct = async () => {
+//   const result = await Product.find();
+//   return result;
+// };
 
 // Retrieve a Specific Product by ID
 const retriveProductByID = async (productId: string) => {
   const result = await Product.findById(productId);
+  return result;
+};
+
+
+// Search and Retrieve a List of All Products
+const retrieveAllProducts = async (searchTerm?: string) => {
+  const query = searchTerm ? { name: new RegExp(searchTerm, 'i') } : {};
+  const result = await Product.find(query);
   return result;
 };
 
@@ -38,8 +46,8 @@ const deleteProduct = async (productId: string) => {
 
 export const productService = {
   createNewProduct,
-  retriveALLProduct,
   retriveProductByID,
   updateProductInfo,
   deleteProduct,
+  retrieveAllProducts,
 };
