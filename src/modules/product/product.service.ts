@@ -19,7 +19,6 @@ const retriveProductByID = async (productId: string) => {
   return result;
 };
 
-
 // Search and Retrieve a List of All Products
 const retrieveAllProducts = async (searchTerm?: string) => {
   const query = searchTerm ? { name: new RegExp(searchTerm, 'i') } : {};

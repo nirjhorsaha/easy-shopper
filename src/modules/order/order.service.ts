@@ -21,13 +21,11 @@ const createNewOrder = async (order: TOrder) => {
   return newOrder;
 };
 
-
 // check inventory quantity
 const checkAvailableQuantity = async (productId: string) => {
   const product = await Product.findById(productId);
   return product ? product.inventory.quantity : 0;
 };
-
 
 // Retrieve All Orders
 const getAllOrders = async (email?: string) => {

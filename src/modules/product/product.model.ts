@@ -19,7 +19,7 @@ const inventorySchema = new Schema<TInventory>({
   },
   inStock: {
     type: Boolean,
-    required: [true, 'In-stock status is required'], 
+    required: [true, 'In-stock status is required'],
   },
 });
 
@@ -27,8 +27,8 @@ const inventorySchema = new Schema<TInventory>({
 const productSchema = new Schema({
   name: {
     type: String,
-    required: [true, 'Product name is required'], 
-    unique: true
+    required: [true, 'Product name is required'],
+    unique: true,
   },
   description: {
     type: String,

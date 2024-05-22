@@ -22,5 +22,4 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello Backend Developer..!');
 });
 
-
 export default app;
