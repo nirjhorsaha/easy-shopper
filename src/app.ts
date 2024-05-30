@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { ProductRoutes } from './modules/product/product.routes';
 import { OrderRoutes } from './modules/order/order.routes';
+import globalErrorHandler from './middleware/globalErrorHandler';
 
 const app = express();
 
@@ -12,12 +13,10 @@ app.use(cors());
 app.use('/api/products', ProductRoutes);
 app.use('/api/orders', OrderRoutes);
 
-
 // initial response check
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello Backend Developer..!');
 });
-
 
 // Not Found Route
 app.use((req, res) => {
@@ -27,6 +26,7 @@ app.use((req, res) => {
   });
 });
 
-
+// global error handler
+app.use(globalErrorHandler);
 
 export default app;

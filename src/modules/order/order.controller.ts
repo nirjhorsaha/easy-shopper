@@ -1,10 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { orderService } from './order.service';
 import orderValidationSchema from './order.validation';
 
-const createOrder = async (req: Request, res: Response) => {
+const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const orderData  = req.body;
+    const orderData = req.body;
     const zodParsedData = orderValidationSchema.parse(orderData);
 
     const availableQuantity = await orderService.checkAvailableQuantity(
@@ -26,12 +26,13 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Order created successfully!',
       data: order,
     });
-  } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: 'Order not found',
-      error: error,
-    });
+  } catch (err: any) {
+    // res.status(500).json({
+    //   success: false,
+    //   message: 'Order not found',
+    //   error: error,
+    // });
+    next({ message: 'Order not found.!', err });
   }
 };
 

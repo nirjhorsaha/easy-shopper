@@ -21,7 +21,14 @@ const retriveProductByID = async (productId: string) => {
 
 // Search and Retrieve a List of All Products
 const retrieveAllProducts = async (searchTerm?: string) => {
-  const query = searchTerm ? { name: new RegExp(searchTerm, 'i') } : {};
+  const query = searchTerm
+    ? {
+        $or: [
+          { name: new RegExp(searchTerm, 'i') },
+          { tags: new RegExp(searchTerm, 'i') },
+        ],
+      }
+    : {};
   const result = await Product.find(query);
   return result;
 };
