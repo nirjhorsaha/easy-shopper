@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const product_routes_1 = require("./modules/product/product.routes");
 const order_routes_1 = require("./modules/order/order.routes");
+const globalErrorHandler_1 = __importDefault(require("./middleware/globalErrorHandler"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -24,4 +25,6 @@ app.use((req, res) => {
         message: 'Route not found',
     });
 });
+// global error handler
+app.use(globalErrorHandler_1.default);
 exports.default = app;
