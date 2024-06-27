@@ -165,7 +165,7 @@ const deleteProduct = async (
       success: true,
       message: 'Product deleted successfully!',
     });
-  } catch (err ) {
+  } catch (err) {
     // res.status(500).json({
     //   success: false,
     //   message: 'Failed to delete product.',
