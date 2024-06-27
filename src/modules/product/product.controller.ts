@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { productService } from './product.service';
 import productValidationSchema from './product.validation';
-import { error } from 'console';
 
 const createProduct = async (
   req: Request,

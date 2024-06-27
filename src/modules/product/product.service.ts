@@ -21,7 +21,7 @@ const retriveProductByID = async (productId: string) => {
 
 // Search and Retrieve a List of All Products
 const retrieveAllProducts = async (searchTerm?: string) => {
-  const query = searchTerm
+  const query = searchTerm  
     ? {
         $or: [
           { name: new RegExp(searchTerm, 'i') },
